@@ -1,3 +1,6 @@
+using CoreMVC.Repositories;
+using CoreMVC.Repositories.IRepositories;
+
 namespace CoreMVC
 {
     public class Program
@@ -5,10 +8,9 @@ namespace CoreMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped<IBookRepository, BookRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,6 +28,7 @@ namespace CoreMVC
             //    name: "default",
             //    pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapDefaultControllerRoute();
+            app.MapControllers();
 
             app.Run();
         }
